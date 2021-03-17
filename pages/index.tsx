@@ -1,30 +1,15 @@
-import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import 'react-pro-sidebar/dist/css/styles.css';
-import axios from 'axios';
+import { useContext } from 'react';
+import MessageContext from './contexts/message';
 
-function Home({ menus }) {
+function Home() {
+  const { data, setData } = useContext(MessageContext);
   return (
-    <ProSidebar>
-      <Menu>
-        {menus.map(item => (
-          <SubMenu title={item.name}>
-            {item.subMenus.map(subItem => (
-              <MenuItem>{subItem.name}</MenuItem>
-            ))}
-          </SubMenu>
-        ))}
-      </Menu>
-    </ProSidebar>
-  );
-}
+    <>
+      <p>{JSON.stringify(data)}</p>
 
-export async function getServerSideProps(context) {
-  const response = await axios.get(
-    'http://my-json-server.typicode.com/workinideas/vagafrontendteste/menus'
+      <input onChange={e => setData(e.target.value)}></input>
+    </>
   );
-  return {
-    props: { menus: response.data }, // will be passed to the page component as props
-  };
 }
 
 export default Home;

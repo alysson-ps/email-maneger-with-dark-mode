@@ -1,10 +1,14 @@
 import { AppProps } from 'next/app';
-
 import '../styles/globals.css';
-import '../styles/index.css';
+
+import { MessageProvider } from './contexts/message';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <MessageProvider>
+      <Component {...pageProps} />
+    </MessageProvider>
+  );
 }
 
 export default MyApp;

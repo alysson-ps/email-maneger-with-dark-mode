@@ -1,29 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ResizableBox } from 'react-resizable';
 import { ProSidebar, Menu as SideMenu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 
+import axios from 'axios';
+
 import Avatar from './Avatar';
-
-interface Isubmenu {
-  id: number;
-  name: string;
-}
-
-interface Imenu {
-  id: number;
-  name: string;
-  subMenus: Isubmenu[];
-}
+import MessageContext from '../contexts/message';
 
 export default function Menu(props: { content: Imenu[] }) {
   const [height, setHeight] = useState<number>(0);
+  const { setData } = useContext(MessageContext);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setHeight(window.innerHeight);
     }
   }, []);
+
+  const handleGetMessage = async (id: string) => {
+    const res = await axios.get(
+      `http://my-json-server.typicode.com/workinideas/vagafrontendteste/items/${id}`
+    );
+
+    const { subMenuItems }: { subMenuItems: IMessage[] } = res.data;
+
+    console.log(res.data.id);
+
+    setData(subMenuItems);
+  };
 
   return (
     <ResizableBox
@@ -42,7 +47,7 @@ export default function Menu(props: { content: Imenu[] }) {
         <div className="flex items-center justify-around my-6">
           <Avatar color="white" />
           <div className="flex items-center justify-center">
-            <button className="flex bg-blue-500 shadow-sm p-1 px-8 -ml-2 rounded-md text-white dark:text-white text-lg">
+            <button className="flex bg-blue-500 shadow-sm p-1 px-8 -ml-2 rounded-md text-white text-lg">
               <span className="inline-flex mt-1 mr-2"></span>
               <a href="#" className="inline-flex text-gray-100">
                 New Email
@@ -51,12 +56,12 @@ export default function Menu(props: { content: Imenu[] }) {
           </div>
         </div>
         {/* #1d1d1d */}
-        <ProSidebar width={'100%'} className="h-full">
+        <ProSidebar width={'100%'}>
           <SideMenu>
             {props.content.map((item: Imenu) => (
               <SubMenu title={item.name}>
                 {item.subMenus.map((subItem: Isubmenu) => (
-                  <MenuItem>{subItem.name}</MenuItem>
+                  <MenuItem onClick={({}) => handleGetMessage(subItem.id)}>{subItem.name}</MenuItem>
                 ))}
               </SubMenu>
             ))}
