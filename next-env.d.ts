@@ -24,3 +24,8 @@ interface IContext {
   data: Array<IMessage>;
   setData: (data: Array<IMessage>) => void;
 }
+
+interface IThemeContext {
+  theme: string;
+  setTheme: (theme: string) => void;
+}

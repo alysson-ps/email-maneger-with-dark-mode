@@ -1,11 +1,7 @@
 import React, { useRef, useState } from 'react';
 import Popper from 'popper.js';
 
-interface Idropdown {
-  color: string;
-}
-
-const Dropdown = ({ color }: Idropdown) => {
+const Dropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
   const btnDropdownRef = useRef(null);
@@ -21,8 +17,6 @@ const Dropdown = ({ color }: Idropdown) => {
     setDropdownPopoverShow(false);
   };
 
-  let bgColor;
-  color === 'white' ? (bgColor = 'bg-gray-800') : (bgColor = 'bg-' + color + '-500');
   return (
     <>
       <div>
@@ -47,16 +41,14 @@ const Dropdown = ({ color }: Idropdown) => {
               ref={popoverDropdownRef}
               className={
                 (dropdownPopoverShow ? 'block ' : 'hidden ') +
-                (color === 'white' ? 'bg-white ' : bgColor + ' ') +
-                'text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1'
+                'text-base z-50 float-left py-2 list-none bg-white  text-left rounded shadow-lg mt-1 dark:bg-gray-800'
               }
               style={{ minWidth: '12rem' }}
             >
               <a
                 href="#pablo"
                 className={
-                  'text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent ' +
-                  (color === 'white' ? ' text-gray-800' : 'text-white')
+                  'text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-900'
                 }
                 onClick={e => e.preventDefault()}
               >
@@ -65,8 +57,7 @@ const Dropdown = ({ color }: Idropdown) => {
               <a
                 href="#pablo"
                 className={
-                  'text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent ' +
-                  (color === 'white' ? ' text-gray-800' : 'text-white')
+                  'text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-900'
                 }
                 onClick={e => e.preventDefault()}
               >
@@ -75,8 +66,7 @@ const Dropdown = ({ color }: Idropdown) => {
               <a
                 href="#pablo"
                 className={
-                  'text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent ' +
-                  (color === 'white' ? ' text-gray-800' : 'text-white')
+                  'text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-900'
                 }
                 onClick={e => e.preventDefault()}
               >
@@ -86,8 +76,7 @@ const Dropdown = ({ color }: Idropdown) => {
               <a
                 href="#pablo"
                 className={
-                  'text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent ' +
-                  (color === 'white' ? ' text-gray-800' : 'text-white')
+                  'text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-900'
                 }
                 onClick={e => e.preventDefault()}
               >
